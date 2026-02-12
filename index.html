@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Laporan Transaksi Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette Modern (Indigo & Slate) */
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+            --secondary: #0ea5e9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #94a3b8;
+            --bg-body: #f1f5f9;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            
+            /* Dimensions */
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 20px 20px 140px 20px; /* Padding bawah besar untuk floating bar */
+        }
+
+        .container { max-width: 700px; margin: 0 auto; }
+
+        /* --- Header --- */
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 0;
+            letter-spacing: -0.025em;
+        }
+        .header p {
+            color: var(--text-light);
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        /* --- Cards --- */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 24px;
+            border: 1px solid white;
+        }
+
+        /* --- Modern Inputs --- */
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group { margin-bottom: 0; }
+        
+        .label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .input-modern {
+            width: 100%;
+            padding: 14px 16px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--dark);
+            transition: all 0.2s ease;
+        }
+        
+        .input-modern:focus {
+            background: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-soft);
+        }
+
+        /* --- Group Section --- */
+        .reason-group {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .group-header {
+            background: var(--primary-soft);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e0e7ff;
+        }
+
+        .group-title-input {
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+        .group-title-input::placeholder { color: #818cf8; opacity: 0.7; }
+
+        /* --- Customer Rows --- */
+        .customer-list { padding: 10px; }
+
+        .customer-row {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 30px 1fr 1fr 1fr 30px;
+            gap: 10px;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        
+        .row-num {
+            font-weight: 700;
+            color: var(--text-light);
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .input-row {
+            border: none;
+            border-bottom: 1px solid transparent;
+            padding: 8px 0;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: var(--dark);
+            background: transparent;
+        }
+        .input-row:focus { border-bottom: 1px solid var(--primary); }
+        .input-row::placeholder { color: #cbd5e1; }
+
+        /* --- Buttons --- */
+        .btn-icon {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-light); transition: color 0.2s;
+            padding: 5px;
+        }
+        .btn-icon:hover.delete { color: var(--danger); background: #fef2f2; border-radius: 6px; }
+
+        .btn-dashed {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 2px dashed #cbd5e1;
+            border-radius: var(--radius-lg);
+            color: var(--text-light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-dashed:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
+
+        .btn-text {
+            background: none; border: none; color: var(--primary);
+            font-weight: 600; font-size: 0.85rem; cursor: pointer;
+            padding: 10px; display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* --- Floating Bottom Bar (Glassmorphism) --- */
+        .floating-dock {
+            position: fixed;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 90%; max-width: 600px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 12px;
+            border-radius: 100px;
+            box-shadow: var(--shadow-float);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .btn-primary {
+            flex-grow: 1;
+            background: linear-gradient(135deg, var(--primary), #4338ca);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            transition: transform 0.1s;
+        }
+        .btn-primary:active { transform: scale(0.97); }
+
+        .btn-circle {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* --- Utilities --- */
+        .hidden { display: none; }
+        
+        .toast {
+            position: fixed; top: 20px; left: 50%; transform: translate(-50%, -100px);
+            background: var(--dark); color: white;
+            padding: 12px 24px; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem;
+            box-shadow: var(--shadow-float);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000; display: flex; align-items: center; gap: 10px;
+        }
+        .toast.show { transform: translate(-50%, 0); }
+
+        /* Responsive Mobile */
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+            
+            .customer-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                position: relative;
+                padding: 16px;
+                border-left: 4px solid var(--primary);
+            }
+            
+            .row-num { display: none; }
+            
+            .btn-icon.delete {
+                position: absolute;
+                top: 10px; right: 10px;
+            }
+            
+            .input-row {
+                border-bottom: 1px solid #f1f5f9;
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Laporan Transaksi</h1>
+        <p>Hasilkan laporan NBDS & OBDS instan</p>
+    </div>
+
+    <div class="card">
+        <div class="input-grid">
+            <div class="form-group">
+                <label class="label">Tanggal</label>
+                <input type="date" id="dateInput" class="input-modern">
+            </div>
+            <div class="form-group">
+                <label class="label">Posisi</label>
+                <select id="roleInput" class="input-modern">
+                    <option value="Teller">Teller</option>
+                    <option value="CS">CS</option>
+                    <option value="Head Teller">Head Teller</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="label">NBDS</label>
+                <input type="number" id="nbdsInput" value="0" class="input-modern">
+            </div>
+            <div class="form-group">
+                <label class="label">OBDS</label>
+                <input type="number" id="obdsInput" value="0" class="input-modern">
+            </div>
+        </div>
+    </div>
+
+    <div id="groups-container"></div>
+
+    <button class="btn-dashed" onclick="addGroup()">
+        <i class="fa-solid fa-plus-circle"></i> Tambah Kelompok Alasan
+    </button>
+</div>
+
+<div class="floating-dock">
+    <button class="btn-circle" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Scroll Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <button class="btn-primary" id="btnMaster" onclick="processAllActions()">
+        <span>Proses & Kirim</span>
+        <i class="fa-solid fa-paper-plane"></i>
+    </button>
+</div>
+
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+    <span>Laporan Tersalin & Dikirim!</span>
+</div>
+
+<script>
+    // --- KONFIGURASI SCRIPT (Opsional) ---
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrDkaS30Pq1pXru94c9FiQ2IV5VNaefcM_Mvz_RKufkbm7sxzD1epSW3CfKVlBtpqt/exec'; // Masukkan URL Google Apps Script di sini
+
+    document.getElementById('dateInput').valueAsDate = new Date();
+
+    // --- UI FUNCTIONS ---
+    function addGroup() {
+        const container = document.getElementById('groups-container');
+        const div = document.createElement('div');
+        div.className = 'reason-group';
+        div.innerHTML = `
+            <div class="group-header">
+                <i class="fa-solid fa-layer-group" style="color:var(--primary)"></i>
+                <input type="text" class="group-title-input" placeholder="Alasan OBDS">
+                <button class="btn-icon delete" onclick="removeGroup(this)"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div class="customer-list">
+                <div class="rows-container"></div>
+                <button class="btn-text" onclick="addCustomerRow(this)">
+                    <i class="fa-solid fa-plus"></i> Tambah Nasabah
+                </button>
+            </div>`;
+        container.appendChild(div);
+        addCustomerRow(div.querySelector('.btn-text')); // Auto add 1 row
+    }
+
+    function removeGroup(btn) {
+        if(confirm('Hapus seluruh kelompok ini?')) {
+            btn.closest('.reason-group').remove();
+        }
+    }
+
+    function addCustomerRow(btn) {
+        const container = btn.previousElementSibling; // Get rows-container
+        const div = document.createElement('div');
+        div.className = 'customer-row';
+        div.innerHTML = `
+            <span class="row-num">#</span>
+            <input type="text" class="input-row input-nama" placeholder="Nama Nasabah">
+            <input type="text" class="input-row input-rek" placeholder="No. Rekening">
+            <input type="text" class="input-row input-trans" placeholder="Ket. Transaksi (Opsional)">
+            <button class="btn-icon delete" onclick="removeRow(this)"><i class="fa-solid fa-xmark"></i></button>`;
+        container.appendChild(div);
+        renumberRows();
+    }
+
+    function removeRow(btn) {
+        btn.closest('.customer-row').remove();
+        renumberRows();
+    }
+
+    function renumberRows() {
+        let globalIndex = 1;
+        document.querySelectorAll('.customer-row').forEach(row => {
+            const numSpan = row.querySelector('.row-num');
+            if(numSpan) numSpan.innerText = globalIndex++;
+        });
+    }
+
+    // --- LOGIKA TEMPLATE (TIDAK DIUBAH SAMA SEKALI) ---
+    function formatDateOriginal(dateString) {
+        if(!dateString) return "";
+        const d = new Date(dateString);
+        return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+    }
+
+    function generateReportText() {
+        const dateVal = document.getElementById('dateInput').value;
+        const role = document.getElementById('roleInput').value;
+        const nbds = document.getElementById('nbdsInput').value;
+        const obds = document.getElementById('obdsInput').value;
+
+        // --- FORMAT TEKS LAPORAN (ASLI) ---
+        let text = `Laporan Jumlah Transaksi ${formatDateOriginal(dateVal)}\n\n`;
+        text += `${role}\n`;
+        text += `- NBDS : ${nbds}\n`;
+        text += `- OBDS : ${obds}\n`;
+
+        const groups = document.querySelectorAll('.reason-group');
+        let detailsText = "";
+        let globalIndex = 1;
+
+        groups.forEach(group => {
+            const reasonTitle = group.querySelector('.group-title-input').value.trim();
+            const rows = group.querySelectorAll('.customer-row');
+            
+            rows.forEach(row => {
+                const nama = row.querySelector('.input-nama').value.trim();
+                const rek = row.querySelector('.input-rek').value.trim();
+                const trans = row.querySelector('.input-trans').value.trim();
+
+                if(nama) {
+                    let line = `${globalIndex}. ${nama} ${rek}`;
+                    if(trans) line += ` (${trans})`; 
+                    if(reasonTitle) line += ` ${reasonTitle}`;
+                    detailsText += `${line}\n`;
+                    globalIndex++;
+                }
+            });
+        });
+
+        if (detailsText) { // Menampilkan detail jika ada isinya
+            text += `- Alasan OBDS:\n${detailsText}`;
+        }
+        
+        return text;
+    }
+
+    // --- ACTION HANDLERS ---
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.querySelector('span').innerText = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    async function processAllActions() {
+        const btn = document.getElementById('btnMaster');
+        const originalHTML = btn.innerHTML;
+        const reportText = generateReportText();
+
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Proses...`;
+
+        try {
+            await navigator.clipboard.writeText(reportText);
+            
+            const waUrl = `https://wa.me/?text=${encodeURIComponent(reportText)}`;
+            window.open(waUrl, '_blank');
+
+            if (SCRIPT_URL && SCRIPT_URL.startsWith('http')) {
+                const fd = new FormData();
+                fd.append('tanggal', formatDateOriginal(document.getElementById('dateInput').value));
+                fd.append('role', document.getElementById('roleInput').value);
+                fd.append('nbds', document.getElementById('nbdsInput').value);
+                fd.append('obds', document.getElementById('obdsInput').value);
+                fd.append('laporan_lengkap', reportText);
+
+                fetch(SCRIPT_URL, { method: 'POST', body: fd })
+                    .then(() => showToast("Sukses: Copy + WA + Excel"))
+                    .catch(() => showToast("Excel Gagal, Copy + WA Aman"));
+            } else {
+                showToast("Berhasil Disalin & Buka WA");
+            }
+        } catch (e) {
+            console.error(e);
+            alert("Terjadi kesalahan browser.");
+        } finally {
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 1000);
+        }
+    }
+    
+    // Init
+    addGroup();
+</script>
+
+</body>
+</html>
