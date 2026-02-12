@@ -9,7 +9,6 @@
     
     <style>
         :root {
-            /* Palette Modern (Indigo & Slate) */
             --primary: #4f46e5;
             --primary-soft: #eef2ff;
             --secondary: #0ea5e9;
@@ -21,8 +20,6 @@
             --bg-body: #f1f5f9;
             --surface: #ffffff;
             --border: #e2e8f0;
-            
-            /* Dimensions */
             --radius-xl: 24px;
             --radius-lg: 16px;
             --radius-md: 12px;
@@ -37,30 +34,15 @@
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; 
-            padding: 20px 20px 140px 20px; /* Padding bawah besar untuk floating bar */
+            padding: 20px 20px 140px 20px;
         }
 
         .container { max-width: 700px; margin: 0 auto; }
 
-        /* --- Header --- */
-        .header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 0;
-            letter-spacing: -0.025em;
-        }
-        .header p {
-            color: var(--text-light);
-            margin-top: 5px;
-            font-size: 0.95rem;
-        }
+        .header { margin-bottom: 30px; text-align: center; }
+        .header h1 { font-size: 1.75rem; font-weight: 800; color: var(--dark); margin: 0; letter-spacing: -0.025em; }
+        .header p { color: var(--text-light); margin-top: 5px; font-size: 0.95rem; }
 
-        /* --- Cards --- */
         .card {
             background: var(--surface);
             border-radius: var(--radius-xl);
@@ -70,24 +52,9 @@
             border: 1px solid white;
         }
 
-        /* --- Modern Inputs --- */
-        .input-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { margin-bottom: 0; }
-        
-        .label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
+        .label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
 
         .input-modern {
             width: 100%;
@@ -101,13 +68,8 @@
             transition: all 0.2s ease;
         }
         
-        .input-modern:focus {
-            background: #fff;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-soft);
-        }
+        .input-modern:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
 
-        /* --- Group Section --- */
         .reason-group {
             background: var(--surface);
             border-radius: var(--radius-lg);
@@ -117,10 +79,7 @@
             animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .group-header {
             background: var(--primary-soft);
@@ -131,19 +90,10 @@
             border-bottom: 1px solid #e0e7ff;
         }
 
-        .group-title-input {
-            border: none;
-            background: transparent;
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1rem;
-            flex-grow: 1;
-        }
+        .group-title-input { border: none; background: transparent; font-weight: 700; color: var(--primary); font-size: 1rem; flex-grow: 1; }
         .group-title-input::placeholder { color: #818cf8; opacity: 0.7; }
 
-        /* --- Customer Rows --- */
         .customer-list { padding: 10px; }
-
         .customer-row {
             background: #fff;
             border: 1px solid var(--border);
@@ -154,143 +104,52 @@
             grid-template-columns: 30px 1fr 1fr 1fr 30px;
             gap: 10px;
             align-items: center;
-            transition: transform 0.2s;
         }
         
-        .row-num {
-            font-weight: 700;
-            color: var(--text-light);
-            text-align: center;
-            font-size: 0.8rem;
-        }
-
-        .input-row {
-            border: none;
-            border-bottom: 1px solid transparent;
-            padding: 8px 0;
-            width: 100%;
-            font-size: 0.9rem;
-            font-family: inherit;
-            color: var(--dark);
-            background: transparent;
-        }
+        .row-num { font-weight: 700; color: var(--text-light); text-align: center; font-size: 0.8rem; }
+        .input-row { border: none; border-bottom: 1px solid transparent; padding: 8px 0; width: 100%; font-size: 0.9rem; font-family: inherit; color: var(--dark); background: transparent; }
         .input-row:focus { border-bottom: 1px solid var(--primary); }
         .input-row::placeholder { color: #cbd5e1; }
 
-        /* --- Buttons --- */
-        .btn-icon {
-            background: none; border: none; cursor: pointer;
-            color: var(--text-light); transition: color 0.2s;
-            padding: 5px;
-        }
+        .btn-icon { background: none; border: none; cursor: pointer; color: var(--text-light); transition: color 0.2s; padding: 5px; }
         .btn-icon:hover.delete { color: var(--danger); background: #fef2f2; border-radius: 6px; }
 
         .btn-dashed {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            border: 2px dashed #cbd5e1;
-            border-radius: var(--radius-lg);
-            color: var(--text-light);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
+            width: 100%; padding: 16px; background: transparent; border: 2px dashed #cbd5e1; border-radius: var(--radius-lg);
+            color: var(--text-light); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         .btn-dashed:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
 
-        .btn-text {
-            background: none; border: none; color: var(--primary);
-            font-weight: 600; font-size: 0.85rem; cursor: pointer;
-            padding: 10px; display: inline-flex; align-items: center; gap: 6px;
-        }
+        .btn-text { background: none; border: none; color: var(--primary); font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 10px; display: inline-flex; align-items: center; gap: 6px; }
 
-        /* --- Floating Bottom Bar (Glassmorphism) --- */
         .floating-dock {
-            position: fixed;
-            bottom: 20px; left: 50%;
-            transform: translateX(-50%);
-            width: 90%; max-width: 600px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.5);
-            padding: 12px;
-            border-radius: 100px;
-            box-shadow: var(--shadow-float);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 100;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5); padding: 12px; border-radius: 100px; box-shadow: var(--shadow-float);
+            display: flex; align-items: center; gap: 10px; z-index: 100;
         }
 
         .btn-primary {
-            flex-grow: 1;
-            background: linear-gradient(135deg, var(--primary), #4338ca);
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-            transition: transform 0.1s;
-        }
-        .btn-primary:active { transform: scale(0.97); }
-
-        .btn-circle {
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            background: #fff;
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            font-size: 1.1rem;
+            flex-grow: 1; background: linear-gradient(135deg, var(--primary), #4338ca); color: white; border: none;
+            padding: 14px 24px; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
         }
 
-        /* --- Utilities --- */
-        .hidden { display: none; }
-        
+        .btn-circle { width: 48px; height: 48px; border-radius: 50%; background: #fff; border: 1px solid var(--border); color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
         .toast {
             position: fixed; top: 20px; left: 50%; transform: translate(-50%, -100px);
-            background: var(--dark); color: white;
-            padding: 12px 24px; border-radius: 50px;
-            font-weight: 600; font-size: 0.9rem;
-            box-shadow: var(--shadow-float);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            background: var(--dark); color: white; padding: 12px 24px; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem; box-shadow: var(--shadow-float); transition: transform 0.4s;
             z-index: 1000; display: flex; align-items: center; gap: 10px;
         }
         .toast.show { transform: translate(-50%, 0); }
 
-        /* Responsive Mobile */
         @media (max-width: 600px) {
             .input-grid { grid-template-columns: 1fr; }
-            
-            .customer-row {
-                grid-template-columns: 1fr;
-                gap: 5px;
-                position: relative;
-                padding: 16px;
-                border-left: 4px solid var(--primary);
-            }
-            
+            .customer-row { grid-template-columns: 1fr; position: relative; padding: 16px; border-left: 4px solid var(--primary); }
             .row-num { display: none; }
-            
-            .btn-icon.delete {
-                position: absolute;
-                top: 10px; right: 10px;
-            }
-            
-            .input-row {
-                border-bottom: 1px solid #f1f5f9;
-                padding: 10px 0;
-            }
+            .btn-icon.delete { position: absolute; top: 10px; right: 10px; }
         }
     </style>
 </head>
@@ -318,11 +177,11 @@
             </div>
             <div class="form-group">
                 <label class="label">NBDS</label>
-                <input type="number" id="nbdsInput" value="0" class="input-modern">
+                <input type="number" id="nbdsInput" class="input-modern" placeholder="0" onfocus="if(this.value=='0')this.value='';">
             </div>
             <div class="form-group">
                 <label class="label">OBDS</label>
-                <input type="number" id="obdsInput" value="0" class="input-modern">
+                <input type="number" id="obdsInput" class="input-modern" placeholder="0" onfocus="if(this.value=='0')this.value='';">
             </div>
         </div>
     </div>
@@ -335,7 +194,7 @@
 </div>
 
 <div class="floating-dock">
-    <button class="btn-circle" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Scroll Top">
+    <button class="btn-circle" onclick="window.scrollTo({top:0, behavior:'smooth'})">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
     <button class="btn-primary" id="btnMaster" onclick="processAllActions()">
@@ -350,12 +209,10 @@
 </div>
 
 <script>
-    // --- KONFIGURASI SCRIPT (Opsional) ---
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrDkaS30Pq1pXru94c9FiQ2IV5VNaefcM_Mvz_RKufkbm7sxzD1epSW3CfKVlBtpqt/exec'; // Masukkan URL Google Apps Script di sini
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrDkaS30Pq1pXru94c9FiQ2IV5VNaefcM_Mvz_RKufkbm7sxzD1epSW3CfKVlBtpqt/exec';
 
     document.getElementById('dateInput').valueAsDate = new Date();
 
-    // --- UI FUNCTIONS ---
     function addGroup() {
         const container = document.getElementById('groups-container');
         const div = document.createElement('div');
@@ -373,17 +230,15 @@
                 </button>
             </div>`;
         container.appendChild(div);
-        addCustomerRow(div.querySelector('.btn-text')); // Auto add 1 row
+        addCustomerRow(div.querySelector('.btn-text'));
     }
 
     function removeGroup(btn) {
-        if(confirm('Hapus seluruh kelompok ini?')) {
-            btn.closest('.reason-group').remove();
-        }
+        if(confirm('Hapus seluruh kelompok ini?')) btn.closest('.reason-group').remove();
     }
 
     function addCustomerRow(btn) {
-        const container = btn.previousElementSibling; // Get rows-container
+        const container = btn.previousElementSibling;
         const div = document.createElement('div');
         div.className = 'customer-row';
         div.innerHTML = `
@@ -409,7 +264,6 @@
         });
     }
 
-    // --- LOGIKA TEMPLATE (TIDAK DIUBAH SAMA SEKALI) ---
     function formatDateOriginal(dateString) {
         if(!dateString) return "";
         const d = new Date(dateString);
@@ -419,10 +273,11 @@
     function generateReportText() {
         const dateVal = document.getElementById('dateInput').value;
         const role = document.getElementById('roleInput').value;
-        const nbds = document.getElementById('nbdsInput').value;
-        const obds = document.getElementById('obdsInput').value;
+        
+        // Perbaikan: Paksa nilai 0 jika input kosong
+        const nbds = document.getElementById('nbdsInput').value || 0;
+        const obds = document.getElementById('obdsInput').value || 0;
 
-        // --- FORMAT TEKS LAPORAN (ASLI) ---
         let text = `Laporan Jumlah Transaksi ${formatDateOriginal(dateVal)}\n\n`;
         text += `${role}\n`;
         text += `- NBDS : ${nbds}\n`;
@@ -451,14 +306,10 @@
             });
         });
 
-        if (detailsText) { // Menampilkan detail jika ada isinya
-            text += `- Alasan OBDS:\n${detailsText}`;
-        }
-        
+        if (detailsText) text += `- Alasan OBDS:\n${detailsText}`;
         return text;
     }
 
-    // --- ACTION HANDLERS ---
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.querySelector('span').innerText = msg;
@@ -476,7 +327,6 @@
 
         try {
             await navigator.clipboard.writeText(reportText);
-            
             const waUrl = `https://wa.me/?text=${encodeURIComponent(reportText)}`;
             window.open(waUrl, '_blank');
 
@@ -484,8 +334,8 @@
                 const fd = new FormData();
                 fd.append('tanggal', formatDateOriginal(document.getElementById('dateInput').value));
                 fd.append('role', document.getElementById('roleInput').value);
-                fd.append('nbds', document.getElementById('nbdsInput').value);
-                fd.append('obds', document.getElementById('obdsInput').value);
+                fd.append('nbds', document.getElementById('nbdsInput').value || 0);
+                fd.append('obds', document.getElementById('obdsInput').value || 0);
                 fd.append('laporan_lengkap', reportText);
 
                 fetch(SCRIPT_URL, { method: 'POST', body: fd })
@@ -495,8 +345,7 @@
                 showToast("Berhasil Disalin & Buka WA");
             }
         } catch (e) {
-            console.error(e);
-            alert("Terjadi kesalahan browser.");
+            alert("Gagal menyalin teks.");
         } finally {
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
@@ -505,7 +354,6 @@
         }
     }
     
-    // Init
     addGroup();
 </script>
 
